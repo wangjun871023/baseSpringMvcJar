@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.macrosoft.model.User;
-import com.macrosoft.service.IUserService;
+import com.macrosoft.service.IUserExampleService;
   
 @Controller  
-@RequestMapping(value="/user")  
-public class UserController {  
+@RequestMapping(value="/userExample")  
+public class UserExampleController {  
 	protected Log logger=LogFactory.getLog(getClass()); 
     /** 
      * 注入userService。 
@@ -21,7 +21,7 @@ public class UserController {
      * 不能是类UserService，不知道为什么。 
      */  
     @Autowired  
-    private IUserService userService;  
+    private IUserExampleService userService;  
       
     @RequestMapping(value="/registe", method=RequestMethod.GET)  
     public String registe() {  

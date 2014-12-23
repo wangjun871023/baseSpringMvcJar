@@ -2,6 +2,6 @@ package com.macrosoft.dao;
 
 import com.macrosoft.model.User;
 
-public interface IUserDao {
+public interface IUserExampleDao {
 	void saveUser(User user);
 }

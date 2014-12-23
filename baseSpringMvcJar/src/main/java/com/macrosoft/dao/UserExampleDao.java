@@ -6,7 +6,7 @@ import com.macrosoft.core.orm.hibernate.HibernateDao;
 import com.macrosoft.model.User;
 
 @Repository  
-public class UserDao extends HibernateDao<User, Integer>  implements IUserDao{
+public class UserExampleDao extends HibernateDao<User, Integer>  implements IUserExampleDao{
 	public void saveUser(User user) {
 		this.save(user);
 	}

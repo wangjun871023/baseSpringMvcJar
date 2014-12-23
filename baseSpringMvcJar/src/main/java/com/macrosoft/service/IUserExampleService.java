@@ -2,7 +2,7 @@ package com.macrosoft.service;
   
 import com.macrosoft.model.User;
   
-public interface IUserService {  
+public interface IUserExampleService {  
   
     public boolean saveUser(User user);
   
