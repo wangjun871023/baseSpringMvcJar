@@ -78,7 +78,6 @@ public class ResponseUtils {
 	public static <T> Map<String, Object> sendList(List<T> T, boolean success) {
 		Map<String, Object> map = getInstanceMap();
 		map.put("dataList", T);
-		// map.put("totalCount", "10");
 		if (success == true) {
 			map.put("success", true);
 			map.put(CommonConst.FORM_ACTION_KEY, true);
