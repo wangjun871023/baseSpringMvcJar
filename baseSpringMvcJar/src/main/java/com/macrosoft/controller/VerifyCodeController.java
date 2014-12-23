@@ -3,12 +3,9 @@ package com.macrosoft.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,12 +29,8 @@ public class VerifyCodeController {
 		HTTP_HEADERS.setContentType(MediaType.IMAGE_JPEG);
 	}
 
-	private int width;
-	private int height;
-
 	@RequestMapping(value = "/getCodeImage", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getCodeImage(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
+	public ResponseEntity<byte[]> getCodeImage(HttpSession session,int width,int height) {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			String code = VerifyCodeUtils.outputVerifyImage(width, height, os, 4);
@@ -50,15 +43,5 @@ public class VerifyCodeController {
 			IOUtils.closeQuietly(os);
 		}
 		return null;
-	}
-
-	@Value("100")
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	@Value("18")
-	public void setHeight(int height) {
-		this.height = height;
 	}
 }
