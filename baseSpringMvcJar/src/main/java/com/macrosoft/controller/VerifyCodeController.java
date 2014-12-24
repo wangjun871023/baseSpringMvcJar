@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.macrosoft.common.constant.CommonConst;
 import com.macrosoft.common.verifyCode.VerifyCodeUtils;
 
 @Controller
@@ -34,7 +35,7 @@ public class VerifyCodeController {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		try {
 			String code = VerifyCodeUtils.outputVerifyImage(width, height, os, 4);
-			session.setAttribute("verfityCode", code);
+			session.setAttribute(CommonConst.VALID_CODE, code);
 			return new ResponseEntity<byte[]>(os.toByteArray(), HTTP_HEADERS,
 					HttpStatus.OK);
 		} catch (IOException e) {
