@@ -15,7 +15,7 @@ import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.google.common.collect.Lists;
-import com.macrosoft.common.collection.Collections3;
+import com.macrosoft.common.collection.CollectionUtils;
 
 public class DynamicSpecifications {
 	private static final ConversionService conversionService = new DefaultConversionService();
@@ -24,7 +24,7 @@ public class DynamicSpecifications {
 		return new Specification<T>() {
 			//xiaolin @Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-				if (Collections3.isNotEmpty(filters)) {
+				if (CollectionUtils.isNotEmpty(filters)) {
 
 					List<Predicate> predicates = Lists.newArrayList();
 					for (SearchFilter filter : filters) {

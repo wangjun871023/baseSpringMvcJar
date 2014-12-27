@@ -37,6 +37,7 @@ import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.Assert;
 
 import com.macrosoft.common.baseFunction.BaseFunction;
+import com.macrosoft.common.collection.CollectionUtils;
 import com.macrosoft.common.constant.CommonConst;
 import com.macrosoft.common.reflection.ReflectionUtils;
 import com.macrosoft.core.BaseForm;
@@ -576,7 +577,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
   	catch(Exception ex){
   		result.setSuccess(false);   		log.error(ex);
   	}
-  	finally{ idArr=null; BaseFunction.clearList(dataList); dataList=null; 
+  	finally{ idArr=null; CollectionUtils.clearList(dataList); dataList=null; 
     }
   	return result;
   }
@@ -608,7 +609,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
   	catch(Exception ex){
   		log.error(ex);
   	}
-  	finally{ condition=null; BaseFunction.clearList(param); param=null;}
+  	finally{ condition=null; CollectionUtils.clearList(param); param=null;}
   	return result;
   } 
 	/**
@@ -842,7 +843,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			log.error(ex); 
 		}
 		finally{
-			BaseFunction.clearList(list);list=null;
+			CollectionUtils.clearList(list);list=null;
 		}
 		return result;
 	}
@@ -880,7 +881,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			log.error(ex,ex); 
 		}
 		finally{
-			BaseFunction.clearList(list);list=null;
+			CollectionUtils.clearList(list);list=null;
 		}
 		return result;
 	}
