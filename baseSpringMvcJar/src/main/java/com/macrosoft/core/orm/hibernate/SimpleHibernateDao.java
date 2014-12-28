@@ -13,6 +13,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -29,7 +30,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import com.macrosoft.common.baseFunction.BaseFunction;
 import com.macrosoft.common.reflection.ReflectionUtils;
   
 
@@ -219,7 +219,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 				return null;
 			}
 			if(value instanceof String){
-				if(BaseFunction.isEmpty((String)value)==true){
+				if(StringUtils.isEmpty((String)value)==true){
 					return null;
 				}
 			}

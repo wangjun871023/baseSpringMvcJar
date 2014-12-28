@@ -36,7 +36,6 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.Assert;
 
-import com.macrosoft.common.baseFunction.BaseFunction;
 import com.macrosoft.common.collection.CollectionUtils;
 import com.macrosoft.common.constant.CommonConst;
 import com.macrosoft.common.reflection.ReflectionUtils;
@@ -437,7 +436,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 				}
 				if(idClass.isInstance(ZERO_STRING)==true){
 					String key=(String)id;
-					if(BaseFunction.isEmpty(key)==false){
+					if(StringUtils.isEmpty(key)==false){
 						result=findUniqueBy("id",id);
 					}
 				}
@@ -475,7 +474,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 public T  getByCode(String code) throws Exception{
 		 T result=null;   
 		  try{ 
-			  if(BaseFunction.isEmpty(code)==false){
+			  if(StringUtils.isEmpty(code)==false){
 			    result=findUniqueBy("code",code);
 			  }
 		  }
@@ -556,8 +555,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
   			if(ids!=null){
   				if(ids instanceof String){
   					 String key=(String)ids;
-  					 if(BaseFunction.isEmpty(key)==false){
-  			  		  idArr=BaseFunction.strToArray(key,CommonConst.SYS_SPLIT_COLON);
+  					 if(StringUtils.isEmpty(key)==false){
+  			  		  idArr=com.macrosoft.common.string.StringUtils.strToArray(key,CommonConst.SYS_SPLIT_COLON);
   			  			if(idArr!=null&&idArr.length>0){
   			  				dataList=getList(key,temp); 		 
   			  				if(dataList!=null&&dataList.size()>0){ 
@@ -626,7 +625,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		String idName=null;
   	try { 
   			//得到解析状态是还没有解析,解析还没有结束的数据
-  			if(BaseFunction.isEmpty(module_id)==false){
+  			if(StringUtils.isEmpty(module_id)==false){
   				condition=new HqlCondition();
   				condition.setSelStr(" select table_entity ");
   				condition.setFromStr(" from  " +temp.getClass().getName()+" as table_entity ");
@@ -634,7 +633,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
   					condition.setWhereStr(" where id in ("+module_id+")"); 
   				}  
   				else{
-  					ids=BaseFunction.strToArray(module_id,CommonConst.SYS_SPLIT_COLON); 
+  					ids=com.macrosoft.common.string.StringUtils.strToArray(module_id,CommonConst.SYS_SPLIT_COLON); 
   					if(ids!=null&&ids.length>0){
   						// 反射获得entity的主键类型
   	  				try {

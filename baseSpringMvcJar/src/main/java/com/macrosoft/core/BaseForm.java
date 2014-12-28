@@ -2,7 +2,6 @@ package com.macrosoft.core;
 
 import java.io.Serializable;
 
-import com.macrosoft.common.baseFunction.BaseFunction;
 import com.macrosoft.common.constant.CommonConst;
 import com.macrosoft.common.string.StringUtils;
 
@@ -74,7 +73,7 @@ public class BaseForm  extends BaseEntity implements Serializable{//extends Base
      * @return
      */
 	public String getPageSize() {
-		pageSize=BaseFunction.checkNull(pageSize);
+		pageSize=StringUtils.checkNull(pageSize);
 		if(StringUtils.isEmpty(pageSize)==true
 				||"0".equals(pageSize)==true
 				||"null".equals(pageSize)==true){			   
@@ -165,7 +164,7 @@ public class BaseForm  extends BaseEntity implements Serializable{//extends Base
 	 * @return
 	 */
 	public String getLimit() {
-		limit=BaseFunction.checkNull(limit);
+		limit=StringUtils.checkNull(limit);
 		if(limit==null ||limit.trim().length()==0
 				||"0".equals(limit)==true ||"null".equals(limit)==true) {
 			limit=Long.toString(CommonConst.SYS_DEFAULT_PAGESIE);
