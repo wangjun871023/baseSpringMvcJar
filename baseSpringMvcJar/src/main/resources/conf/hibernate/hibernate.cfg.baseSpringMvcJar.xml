@@ -4,11 +4,6 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<mapping class="com.sxrs.pojo.UserEntity" />
-		<mapping class="com.sxrs.pojo.DeptEntity" />
-		<mapping class="com.sxrs.pojo.MenuEntity" />
-		<mapping class="com.sxrs.pojo.ModelEntity" />
-		<mapping class="com.sxrs.pojo.InfoEntity" />
-		<mapping class="com.sxrs.pojo.InfoTypeEntity" />
+	
 	</session-factory>
 </hibernate-configuration>
