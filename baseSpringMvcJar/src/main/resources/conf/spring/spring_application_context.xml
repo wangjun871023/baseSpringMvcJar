@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
@@ -74,14 +73,14 @@
 				</prop>
 				<prop key="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop> 
+				<prop key="hibernate.cache.use_query_cache">true</prop>
 			</props>
 		</property>
 	</bean>
 
 	<!-- 自动扫面注解包 -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.macrosoft">
+	<context:component-scan base-package="com">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -121,6 +120,7 @@
 			<tx:method name="create*" propagation="REQUIRED" />
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
 			<tx:method name="del*" propagation="REQUIRED" />
 			<tx:method name="remove*" propagation="REQUIRED" />
 			<!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到 -->
@@ -132,17 +132,20 @@
 	</tx:advice>
 	<!-- 只对业务逻辑层实施事务 -->
 	<aop:config>
-		<aop:advisor pointcut="execution(* com.macrosoft.service.*Service.*(..))"
+		<aop:advisor pointcut="execution(* com.sxrs.service.*Service.*(..))"
 			advice-ref="txAdvice" />
-		<!-- <aop:advisor pointcut="execution(* com.macrosoft.core.orm.hibernate.*Dao.*(..))" 
-			advice-ref="txAdvice" /> -->
+		<aop:advisor
+			pointcut="execution(* com.macrosoft.core.orm.hibernate.*Dao.*(..))"
+			advice-ref="txAdvice" />
 		<aop:advisor pointcut="execution(* org.springside.examples..*Service.*(..))"
 			advice-ref="txAdvice" />
 	</aop:config>
 
 
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<!-- SpringContextHandler定义 -->
-	<!-- 
-	<bean class="com.macrosoft.core.SpringContextHolder" lazy-init="false" />
- 	-->
+	<bean class="com.macrosoft.core.SpringContextHolder" lazy-init="true" />
 </beans>  
