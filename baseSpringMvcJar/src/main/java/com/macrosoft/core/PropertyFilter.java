@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2005-20010 springside.org.cn
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * 
- * $Id: PropertyFilter.java 1205 2010-09-09 15:12:17Z xiaoxiu $
- */
 package com.macrosoft.core;
 
 import java.util.Date;
@@ -12,13 +5,10 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
-import com.macrosoft.common.convert.ConvertUtils;
- 
-
 /**
  * 与具体ORM实现无关的属性过滤条件封装类, 主要记录页面中简单的搜索过滤条件.
  * 
- * @author xiao
+ * @author 呆呆
  */
 public class PropertyFilter {
 
@@ -32,7 +22,8 @@ public class PropertyFilter {
 
 	/** 属性数据类型. */
 	public enum PropertyType {
-		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(Date.class), B(Boolean.class);
+		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(
+				Date.class), B(Boolean.class);
 
 		private Class<?> clazz;
 
@@ -55,36 +46,43 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * @param filterName 比较属性字符串,含待比较的比较类型、属性值类型及属性列表. 
-	 *                   eg. LIKES_NAME_OR_LOGIN_NAME
-	 * @param value 待比较的值.
+	 * @param filterName
+	 *            比较属性字符串,含待比较的比较类型、属性值类型及属性列表. LIKES_NAME_OR_LOGIN_NAME
+	 * @param value
+	 *            待比较的值.
 	 */
 	public PropertyFilter(final String filterName, final String value) {
 
 		String firstPart = StringUtils.substringBefore(filterName, "_");
-		String matchTypeCode = StringUtils.substring(firstPart, 0, firstPart.length() - 1);
-		String propertyTypeCode = StringUtils.substring(firstPart, firstPart.length() - 1, firstPart.length());
+		String matchTypeCode = StringUtils.substring(firstPart, 0,
+				firstPart.length() - 1);
+		String propertyTypeCode = StringUtils.substring(firstPart,
+				firstPart.length() - 1, firstPart.length());
 
 		try {
 			matchType = Enum.valueOf(MatchType.class, matchTypeCode);
 		} catch (RuntimeException e) {
-			throw new IllegalArgumentException("filter名称" + filterName + "没有按规则编写,无法得到属性比较类型.", e);
+			throw new IllegalArgumentException("filter名称" + filterName
+					+ "没有按规则编写,无法得到属性比较类型.", e);
 		}
 
 		try {
-			propertyClass = Enum.valueOf(PropertyType.class, propertyTypeCode).getValue();
+			propertyClass = Enum.valueOf(PropertyType.class, propertyTypeCode)
+					.getValue();
 		} catch (RuntimeException e) {
-			throw new IllegalArgumentException("filter名称" + filterName + "没有按规则编写,无法得到属性值类型.", e);
+			throw new IllegalArgumentException("filter名称" + filterName
+					+ "没有按规则编写,无法得到属性值类型.", e);
 		}
 
 		String propertyNameStr = StringUtils.substringAfter(filterName, "_");
-		Assert.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
-		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
+		Assert.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称"
+				+ filterName + "没有按规则编写,无法得到属性名称.");
+		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr,
+				PropertyFilter.OR_SEPARATOR);
 
-		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
+		this.matchValue = com.macrosoft.common.string.StringUtils
+				.convertStringToObject(value, propertyClass);
 	}
-
- 
 
 	/**
 	 * 获取比较值的类型.
@@ -118,7 +116,8 @@ public class PropertyFilter {
 	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
-		Assert.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
+		Assert.isTrue(propertyNames.length == 1,
+				"There are not only one property in this filter.");
 		return propertyNames[0];
 	}
 

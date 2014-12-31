@@ -2,6 +2,11 @@ package com.macrosoft.core;
 
 import com.macrosoft.core.orm.Page;
  
+/**
+ * @author Dao基类 
+ *
+ * @param <T>
+ */
 public interface EntityDao<T> {
 	/**
 	 * 保存信息 

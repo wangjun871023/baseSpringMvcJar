@@ -2,11 +2,14 @@ package com.macrosoft.core.cookies;
 
 import java.security.Key;
 import java.security.SecureRandom;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+
+import com.macrosoft.common.base64.Base64Utils;
 
  
 /**
@@ -106,7 +109,7 @@ public final class DesEncryUtils {
 	        // 正式执行加密操作
 	        encryptedData=getEncCode(data);  
 			//result=Base64Util.encodeString(new String(encryptedData));
-	        result=new String(Base64Util.encode(encryptedData));
+	        result=new String(Base64Utils.encode(encryptedData));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

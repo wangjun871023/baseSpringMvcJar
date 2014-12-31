@@ -108,7 +108,7 @@ public class ResponseUtils {
 		Map<String, Object> map = getInstanceMap();
 		if (page != null) {
 			map.put(CommonConst.PAGE_ROOT_KEY, page.getData());
-			map.put(CommonConst.PAGIE_TOTAL_KEY, page.getTotalCount());
+			map.put(CommonConst.PAGE_TOTAL_KEY, page.getTotalCount());
 		}
 		if (success == true) {
 			map.put("success", true);
